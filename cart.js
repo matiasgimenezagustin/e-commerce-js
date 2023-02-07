@@ -3,6 +3,7 @@ const URL_API = "https://api.escuelajs.co/api/v1/products"
 const btnCleanCartHTML = document.querySelector("#btnCleanCart")
 const btnConfirmCartHTML = document.querySelector("#btnConfirmCart")
 const cartContainerHTML = document.querySelector(".cart-cards-container")
+const totalHTML = document.querySelector("#total")
 
 class CartManager {
     constructor(){
@@ -65,14 +66,14 @@ class CartManager {
                 <div class="cart-card">
                     <div class="cart-card-info">
                         <h2>${product.title}</h2>
-                        <p>Price: $${product.price}</p>
+                        <p>Unit Price: $${product.price}</p>
                         <p>Units: ${product.quantity}</p>
                     </div>
                     <div class="cart-cards-btns-container">
                         <div >
-                            <button class="btn btn-add-cart" id="btn-add-cart-${product.id}">-</button>
+                            <button class="btn btn-add-cart" id="btn-add-cart-${product.id}">+</button>
                             <p>${product.quantity}</p>
-                            <button class="btn btn-less-cart" id="btn-less-cart-${product.id}">+</button>
+                            <button class="btn btn-less-cart" id="btn-less-cart-${product.id}">-</button>
                         </div>
                         <button class="btn btn-delete-cart" id="btn-delete-cart-${product.id}"><i class="bi bi-trash3-fill"></i></button>
                     </div>
@@ -102,6 +103,9 @@ class CartManager {
                 cartManager.renderCart()
             })
         }
+        let total = 0
+        this.cart.forEach(product => total += Number(product.price) * Number(product.quantity))
+        totalHTML.innerHTML = `<h2>Total: $${total}</h2>`
     }
 }
 
@@ -119,15 +123,26 @@ btnCleanCartHTML.addEventListener("click",() => {
     cartManager.renderCart()
 })
 btnConfirmCartHTML.addEventListener("click", () => {
-    cartManager.clean()
-    Toastify({
-        text: "Se confirmo tu carrito",
-        duration: 3000,
-        style: {
-            background: "rgb(98, 192, 98)"
-        }
-        }).showToast();
-        cartManager.renderCart()
+    if(cartManager.cart.length < 1){
+        Toastify({
+            text: "No tienes productos en tu carrito!",
+            duration: 3000,
+            style: {
+                background: "rgb(225, 85, 85)"
+            }
+            }).showToast();
+    }else{
+        cartManager.clean()
+        Toastify({
+            text: "Se confirmo tu carrito",
+            duration: 3000,
+            style: {
+                background: "rgb(98, 192, 98)"
+            }
+            }).showToast();
+            cartManager.renderCart()
+    }
+    
 })
 
 
