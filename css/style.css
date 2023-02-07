@@ -3,7 +3,7 @@
 :root{
     --white-ultra-light: #FAF8F1;
     --white-light: #e3d4a0;
-    --brown-light: #a78041;
+    --brown-light: #c89e5a;
     --brown: #573b18;
 }
 *{
@@ -18,8 +18,14 @@
     font-size: .8rem;
     margin-left: 10px;
 }
+html{
+    scroll-behavior: smooth;
+}
 body{
     background-color: var(--brown-light);
+    background-image: radial-gradient(rgba(87, 59, 24, 0.85) 3px, transparent 3px), radial-gradient(rgba(87, 59, 24, 0.85) 3px, transparent 3px);
+    background-size: 56px 56px;
+    background-position: 0 0, 28px 28px;
 }
 
 header{
@@ -88,13 +94,17 @@ a{
     flex-direction: column;
     box-shadow: 0 0 7px var(--brown);
 }
+.card:hover{
+    transition: all .5s;
+    transform: scale(1.05);
+}
 .card-img{
     width: 100%;
     border-radius: 5px;
     opacity: 0.9;
 }
 .card-img:hover{
-    transition: 1s all;
+    transition: 3s all;
     opacity: 1;
 }
 .btn{
@@ -147,6 +157,7 @@ h1{
     padding: 10px 3vw;
     color: var(--white-ultra-light);
 }
+
 .cart-card h2{
     font-size: 2rem;
 }
@@ -178,5 +189,19 @@ h1{
     padding: 5vh 5vw;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.to-up{
+    position: fixed;
+    border-radius: 50%;
+    bottom: 1vh;
+    color: var(--white-ultra-light);
+    background-color: var(--brown);
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
